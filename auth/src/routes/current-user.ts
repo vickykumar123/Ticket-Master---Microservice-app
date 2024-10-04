@@ -1,6 +1,5 @@
 import express from "express";
-import jwt from "jsonwebtoken";
-import {currentUser} from "../middleware/currentUser";
+import {currentUser} from "@wiki-ticket/common";
 
 const router = express.Router();
 
