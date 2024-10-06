@@ -5,6 +5,8 @@ import cookieSession from "cookie-session";
 import {currentUser, errorHandler, NotFoundError} from "@wiki-ticket/common";
 import {createTicketRouter} from "./routes/createTicket";
 import {listTicketRouter} from "./routes/listTicket";
+import {getAllTickets} from "./routes/getAllTickets";
+import {updateTicket} from "./routes/updateTicket";
 
 const app = express();
 app.set("trust proxy", true);
@@ -16,10 +18,11 @@ app.use(
   })
 );
 
-app.use(listTicketRouter);
-
 app.use(currentUser);
+app.use(listTicketRouter);
+app.use(getAllTickets);
 app.use(createTicketRouter);
+app.use(updateTicket);
 app.all("*", () => {
   throw new NotFoundError();
 });

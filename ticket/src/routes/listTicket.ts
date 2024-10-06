@@ -9,7 +9,7 @@ router.get("/api/tickets/:ticketId", async (req: Request, res: Response) => {
   if (!ticket) {
     throw new NotFoundError();
   }
-  res.sendStatus(200).json(ticket);
+  res.send(ticket);
 });
 
 export {router as listTicketRouter};

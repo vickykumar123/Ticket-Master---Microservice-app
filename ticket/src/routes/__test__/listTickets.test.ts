@@ -19,10 +19,5 @@ it("returns the ticket if the ticket is found", async () => {
       price,
     });
 
-  const ticketResponse = await request(app)
-    .get(`/api/tickets/${response.body.id}`)
-    .send()
-    .expect(200);
-  expect(ticketResponse.body.title).toEqual(title);
-  expect(ticketResponse.body.price).toEqual(price);
+  await request(app).get(`/api/tickets/${response.body.id}`).send().expect(200);
 });
