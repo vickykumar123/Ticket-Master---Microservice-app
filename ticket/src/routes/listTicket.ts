@@ -1,0 +1,15 @@
+import express, {Request, Response} from "express";
+import {Ticket} from "../models/ticket";
+import {NotFoundError} from "@wiki-ticket/common";
+
+const router = express.Router();
+
+router.get("/api/tickets/:ticketId", async (req: Request, res: Response) => {
+  const ticket = await Ticket.findById(req.params.ticketId);
+  if (!ticket) {
+    throw new NotFoundError();
+  }
+  res.sendStatus(200).json(ticket);
+});
+
+export {router as listTicketRouter};

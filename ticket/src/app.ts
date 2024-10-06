@@ -3,7 +3,8 @@ import "express-async-errors";
 import cookieSession from "cookie-session";
 
 import {currentUser, errorHandler, NotFoundError} from "@wiki-ticket/common";
-import {CreateTicketRouter} from "./routes/createTicket";
+import {createTicketRouter} from "./routes/createTicket";
+import {listTicketRouter} from "./routes/listTicket";
 
 const app = express();
 app.set("trust proxy", true);
@@ -15,8 +16,10 @@ app.use(
   })
 );
 
+app.use(listTicketRouter);
+
 app.use(currentUser);
-app.use(CreateTicketRouter);
+app.use(createTicketRouter);
 app.all("*", () => {
   throw new NotFoundError();
 });

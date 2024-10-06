@@ -1,6 +1,7 @@
 import {requireAuth, validationRequest} from "@wiki-ticket/common";
 import express, {Request, Response} from "express";
 import {body} from "express-validator";
+import {Ticket} from "../models/ticket";
 
 const router = express.Router();
 
@@ -12,12 +13,19 @@ router.post(
     body("price").isFloat({gt: 0}).withMessage("price must be greater than 0"),
   ],
   validationRequest,
-  (req: Request, res: Response) => {
+  async (req: Request, res: Response) => {
     if (!req.currentUser) {
       return res.sendStatus(401);
     }
-    res.sendStatus(200);
+    const {title, price} = req.body;
+    const ticket = Ticket.build({
+      title,
+      price,
+      userId: req.currentUser.id,
+    });
+    await ticket.save();
+    res.status(201).send(ticket);
   }
 );
 
-export {router as CreateTicketRouter};
+export {router as createTicketRouter};
