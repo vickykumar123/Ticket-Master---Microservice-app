@@ -5,7 +5,7 @@ import cookieSession from "cookie-session";
 import {currentUser, errorHandler, NotFoundError} from "@wiki-ticket/common";
 import {deleteOrderRouter} from "./routes/deleteOrder";
 import {getOrderByIdRouter} from "./routes/getOrderById";
-import {getOrderRouter} from "./routes/getOrder";
+import {getOrderRouter} from "./routes/getCurrentUserOrder";
 import {createOrderRouter} from "./routes/createOrder";
 
 const app = express();
