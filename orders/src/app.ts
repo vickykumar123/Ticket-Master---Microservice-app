@@ -3,6 +3,10 @@ import "express-async-errors";
 import cookieSession from "cookie-session";
 
 import {currentUser, errorHandler, NotFoundError} from "@wiki-ticket/common";
+import {deleteOrderRouter} from "./routes/deleteOrder";
+import {getOrderByIdRouter} from "./routes/getOrderById";
+import {getOrderRouter} from "./routes/getOrder";
+import {createOrderRouter} from "./routes/createOrder";
 
 const app = express();
 app.set("trust proxy", true);
@@ -15,6 +19,10 @@ app.use(
 );
 
 app.use(currentUser);
+app.use(deleteOrderRouter);
+app.use(getOrderRouter);
+app.use(getOrderByIdRouter);
+app.use(createOrderRouter);
 
 app.all("*", () => {
   throw new NotFoundError();
