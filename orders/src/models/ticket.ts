@@ -3,6 +3,7 @@ import {Order} from "./order";
 import {OrderStatus} from "@wiki-ticket/common";
 
 interface TicketAttrs {
+  id: string;
   title: string;
   price: number;
 }
@@ -40,7 +41,11 @@ const ticketSchema = new mongoose.Schema(
 );
 // This add to the collection
 ticketSchema.statics.build = (attr: TicketAttrs) => {
-  return new Ticket(attr);
+  return new Ticket({
+    _id: attr.id,
+    title: attr.title,
+    price: attr.price,
+  });
 };
 
 // This is added to the document.
