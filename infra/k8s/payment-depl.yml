@@ -31,6 +31,11 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY # This is different, we are getting from the secret...
+            - name: STRIPE_KEY # We are creating.
+              valueFrom:
+                secretKeyRef:
+                  name: stripe-secret
+                  key: STRIPE_KEY # This is different, we are getting from the secret...
           imagePullPolicy: Never
 --- # below service will create ClusterIP service to communicate between the pods
 apiVersion: v1

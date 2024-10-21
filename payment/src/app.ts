@@ -3,6 +3,7 @@ import "express-async-errors";
 import cookieSession from "cookie-session";
 
 import {currentUser, errorHandler, NotFoundError} from "@wiki-ticket/common";
+import {createPayments} from "./routes/createPayment";
 
 const app = express();
 app.set("trust proxy", true);
@@ -15,6 +16,8 @@ app.use(
 );
 
 app.use(currentUser);
+app.use(createPayments);
+
 app.all("*", () => {
   throw new NotFoundError();
 });
