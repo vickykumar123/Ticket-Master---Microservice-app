@@ -20,3 +20,4 @@ export * from "./events/orderCancelledEvent";
 export * from "./events/orderCreatedEvent";
 
 export * from "./events/orderExpireEvent";
+export * from "./events/paymentCreatedEvent";
