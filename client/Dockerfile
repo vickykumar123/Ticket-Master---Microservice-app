@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Clear npm cache and install dependencies with --no-optional for faster installs
-RUN npm cache clean --force && npm install --no-optional --omit=dev
+RUN npm install --no-optional --omit=dev
 
 # Copy the rest of the application files
 COPY . .
