@@ -32,6 +32,13 @@ spec:
                   name: jwt-secret
                   key: JWT_KEY # This is different, we are getting from the secret...
           imagePullPolicy: Never
+          volumeMounts:
+            - name: orders-data
+              mountPath: /app/data/order # This is where your app writes persistent data
+      volumes:
+        - name: orders-data
+          persistentVolumeClaim:
+            claimName: orders-data-pvc
 --- # below service will create ClusterIP service to communicate between the pods
 apiVersion: v1
 kind: Service
@@ -45,3 +52,14 @@ spec:
       protocol: TCP
       port: 3000
       targetPort: 3000
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: orders-data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi # Adjust size based on your needs
